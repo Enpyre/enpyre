@@ -1,3 +1,5 @@
+import { Graphics } from "pixi.js";
+
 export type CanvasProps = {
     height: number;
     width: number;
@@ -16,4 +18,4 @@ export type DrawCircle = (
     y: number,
     r: number,
     color: string
-) => void
+) => Graphics

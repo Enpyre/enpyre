@@ -22,7 +22,6 @@ export default defineConfig({
         external: [
           'react',
           'react-dom',
-          '@inlet/react-pixi',
           'pyodide',
           'pixi.js',
           'error-stack-parser',
@@ -33,7 +32,6 @@ export default defineConfig({
                 react: 'React',
                 'react-dom': 'ReactDOM',
                 'styled-components': 'styled',
-                '@inlet/react-pixi': 'ReactPIXI',
                 pyodide: 'pyodide',
                 'pixi.js': 'pixijs',
                 'error-stack-parser': 'errorStackParser',

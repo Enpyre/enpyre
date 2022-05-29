@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { loadPyodide } from 'pyodide/pyodide.js';
 import { loadFunctions } from '../engine';
-import { Application } from 'pixi.js';
+import { useApp } from '../hooks/App';
 
 const Pyongine: React.FC = () => {
     const [pyodide, setPyodide] = useState<any>();
     const [pyodideLoaded, setPyodideLoaded] = useState(!!window.pyodideAlreadyLoading);
     const [functionsLoaded, setFunctionsLoaded] = useState(!!window.functionsLoaded);
-    const [app, setApp] = useState<Application | undefined>(undefined);
+    const { app, setApp } = useApp();
 
     const loadPyodideScript = useCallback(async () => {
         window.pyodideAlreadyLoading = true;
@@ -37,16 +37,18 @@ const Pyongine: React.FC = () => {
         }
     }, [app, pyodideLoaded]);
 
+    useEffect(() => {
+        if (app) {
+            const canvasDiv: any = document.getElementById("canvas-container");
+            canvasDiv.innerHTML = '';
+            canvasDiv.appendChild(app.view);
+        }
+    }, [app]);
+
     return (
         <div>
             {functionsLoaded ? (
-                <>
-                    <div id="canvas-container" />
-                    <button onClick={() => {
-                        console.log('window.drawCanvas', window.drawCanvas)
-                        window.drawCanvas(300, 300, '#111111', (delta) => {})
-                    }}>Render</button>
-                </>
+                <div id="canvas-container" />
             ) : (
                 <div>Loading...</div>
             )}

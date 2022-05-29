@@ -8,6 +8,7 @@ declare global {
         loadPyodide: () => Promise<any>;
         pyodideAlreadyLoading: boolean;
         functionsLoaded: boolean;
+        appLoading: boolean;
         drawCanvas: DrawCanvas;
         drawCircle: DrawCircle;
     }
