@@ -1,0 +1,35 @@
+{
+  "name": "pyongine",
+  "version": "0.0.1",
+  "files": ["dist"],
+  "main": "./dist/pyongine.umd.js",
+  "module": "./dist/pyongine.es.js",
+  "types": "./dist/index.d.ts",
+  "author": "Lucas Amoedo e Vitor Nere",
+  "license": "GPL-3.0-or-later",
+  "exports": {
+    ".": {
+      "import": "./dist/pyongine.es.js",
+      "require": "./dist/pyongine.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite src/preview",
+    "build": "vite build && tsc",
+    "prepublish": "yarn build"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "typescript": "^4.6.3",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "vite": "^2.9.9"
+  }
+}
