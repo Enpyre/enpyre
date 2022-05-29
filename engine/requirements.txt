@@ -1,0 +1,16 @@
+aiohttp==3.7.4.post0
+aiohttp-cors==0.7.0
+async-timeout==3.0.1
+attrs==21.2.0
+build==0.7.0
+certifi==2021.5.30
+chardet==4.0.0
+idna==3.2
+multidict==5.1.0
+packaging==21.0
+pep517==0.11.0
+pyparsing==2.4.7
+tomli==1.2.1
+typing-extensions==3.10.0.2
+watchgod==0.7
+yarl==1.6.3

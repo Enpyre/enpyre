@@ -5,8 +5,18 @@
   "main": "./dist/pyongine.umd.js",
   "module": "./dist/pyongine.es.js",
   "types": "./dist/index.d.ts",
-  "author": "Lucas Amoedo e Vitor Nere",
+  "author": "Vitor Nere",
   "license": "GPL-3.0-or-later",
+  "description": "A Python game engine for the browser",
+  "keywords": ["game", "python", "browser", "javascript", "engine"],
+  "homepage": "https://github.com/Pyongine/pyongine/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pyongine/pyongine/tree/main/lib"
+  },
+  "bugs": {
+    "url": "https://github.com/Pyongine/pyongine/issues"
+  },
   "exports": {
     ".": {
       "import": "./dist/pyongine.es.js",
