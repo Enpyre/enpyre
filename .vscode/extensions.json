@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "naumovs.color-highlight",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "abusaidm.html-snippets",
+    "rvest.vs-code-prettier-eslint",
+    "styled-components.vscode-styled-components"
+  ]
+}
