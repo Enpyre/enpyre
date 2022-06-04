@@ -1,0 +1,48 @@
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+  push:
+    branches:
+      - main
+
+jobs:
+  lint_and_build:
+    name: Lint and Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install
+      - name: Lint
+        uses: borales/actions-yarn@2.0.0
+        with:
+          cmd: lint
+      - name: Build
+        uses: borales/actions-yarn@2.0.0
+        with:
+          cmd: build
+  # deploy:
+  #   name: Deploy
+  #   runs-on: ubuntu-latest
+  #   depends-on:
+  #     - lint_and_build
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Install dependencies
+  #       uses: borales/actions-yarn@v2.0.0
+  #       with:
+  #         cmd: install
+  #     - name: Build
+  #       uses: borales/actions-yarn@v2.0.0
+  #       with:
+  #         cmd: build
+  #     - name: Deploy
+  #       uses: borales/actions-yarn@v2.0.0
+  #       with:
+  #         cmd: deploy
