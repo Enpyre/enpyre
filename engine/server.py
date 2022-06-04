@@ -1,5 +1,4 @@
 import os
-import src.engine
 import aiohttp_cors
 from aiohttp import web
 

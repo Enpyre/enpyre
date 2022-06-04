@@ -14,6 +14,9 @@ const AppContextProvider: React.FC<PropsWithChildren<{}>> = ({
     children,
 }) => {
     const [app, setApp] = React.useState<Application | undefined>(undefined);
+
+    console.log('AppContextProvider: app', app);
+
     return (
         <AppContext.Provider value={{ app, setApp }}>
             {children}

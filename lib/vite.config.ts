@@ -14,9 +14,9 @@ export default defineConfig({
   build: {
     lib: {
         entry: path.resolve(__dirname, 'src/index.ts'),
-        name: 'Pyongine',
+        name: 'Enpyre',
         formats: ['es', 'umd'],
-        fileName: (format) => `pyongine.${format}.js`,
+        fileName: (format) => `enpyre.${format}.js`,
     },
     rollupOptions: {
         external: [
@@ -25,6 +25,8 @@ export default defineConfig({
           'pyodide',
           'pixi.js',
           'error-stack-parser',
+          'ace-builds',
+          'react-ace'
         ],
         output: {
             inlineDynamicImports: true,
@@ -35,6 +37,8 @@ export default defineConfig({
                 pyodide: 'pyodide',
                 'pixi.js': 'pixijs',
                 'error-stack-parser': 'errorStackParser',
+                'ace-build': 'aceBuilds',
+                'react-ace': 'reactAce'
             },
         },
     },

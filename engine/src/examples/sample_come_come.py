@@ -1,15 +1,15 @@
-from src.engine import Pyongine
+from engine import Enpyre
 
-pyongine = Pyongine()
+enpyre = Enpyre()
 
-pyongine.x = pyongine.y = START_X = START_Y = 0
+enpyre.x = enpyre.y = START_X = START_Y = 0
 BOARD_WIDTH = BOARD_HEIGHT = 600
 
 def fill_cell(x, y, color='#000000'):
-    return pyongine.draw_circle(x*100 + 50, y*100 + 50, 50, color)
+    return enpyre.draw_circle(x*100 + 50, y*100 + 50, 50, color)
 
 def start_board():
-    pyongine.board = [
+    enpyre.board = [
         [
             fill_cell(x, y) for x in range(BOARD_WIDTH//100)
         ] for y in range(BOARD_HEIGHT//100)
@@ -17,32 +17,32 @@ def start_board():
 
 def move(x, y):
     print(f'Moving to {x}, {y}')
-    print(f'Current position: {pyongine.x}, {pyongine.y}')
-    fill_cell(pyongine.x, pyongine.y, '#FFFFFF')
+    print(f'Current position: {enpyre.x}, {enpyre.y}')
+    fill_cell(enpyre.x, enpyre.y, '#FFFFFF')
     fill_cell(x, y, '#FF0000')
-    pyongine.x = x
-    pyongine.y = y
+    enpyre.x = x
+    enpyre.y = y
 
 def compute_key():
-    if pyongine.key_pressed(pyongine.KEY_UP):
-        if pyongine.y > 0:
-            move(pyongine.x, pyongine.y - 1)
-    if pyongine.key_pressed(pyongine.KEY_DOWN):
-        if pyongine.y < BOARD_HEIGHT//100 - 1:
-            move(pyongine.x, pyongine.y + 1)
-    if pyongine.key_pressed(pyongine.KEY_LEFT):
-        if pyongine.x > 0:
-            move(pyongine.x - 1, pyongine.y)
-    if pyongine.key_pressed(pyongine.KEY_RIGHT):
-        if pyongine.x < BOARD_WIDTH//100 - 1:
-            move(pyongine.x + 1, pyongine.y)
+    if enpyre.key_pressed(enpyre.KEY_UP):
+        if enpyre.y > 0:
+            move(enpyre.x, enpyre.y - 1)
+    if enpyre.key_pressed(enpyre.KEY_DOWN):
+        if enpyre.y < BOARD_HEIGHT//100 - 1:
+            move(enpyre.x, enpyre.y + 1)
+    if enpyre.key_pressed(enpyre.KEY_LEFT):
+        if enpyre.x > 0:
+            move(enpyre.x - 1, enpyre.y)
+    if enpyre.key_pressed(enpyre.KEY_RIGHT):
+        if enpyre.x < BOARD_WIDTH//100 - 1:
+            move(enpyre.x + 1, enpyre.y)
 
 
-def update(time: float):
-    if not hasattr(pyongine, 'board'):
+def update(delta: float):
+    if not hasattr(enpyre, 'board'):
         start_board()
         move(START_X, START_Y)
     else:
         compute_key()
 
-pyongine.run(BOARD_HEIGHT, BOARD_WIDTH, '#ffffff', update)
+enpyre.run(BOARD_HEIGHT, BOARD_WIDTH, '#ffffff', update)

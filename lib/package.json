@@ -1,11 +1,11 @@
 {
-  "name": "pyongine",
+  "name": "enpyre",
   "version": "0.0.1",
   "files": [
     "dist"
   ],
-  "main": "./dist/pyongine.umd.js",
-  "module": "./dist/pyongine.es.js",
+  "main": "./dist/enpyre.umd.js",
+  "module": "./dist/enpyre.es.js",
   "types": "./dist/index.d.ts",
   "author": "Vitor Nere",
   "license": "GPL-3.0-or-later",
@@ -17,18 +17,18 @@
     "javascript",
     "engine"
   ],
-  "homepage": "https://github.com/Pyongine/pyongine/",
+  "homepage": "https://github.com/Enpyre/enpyre/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pyongine/pyongine/tree/main/lib"
+    "url": "https://github.com/Enpyre/enpyre/tree/main/lib"
   },
   "bugs": {
-    "url": "https://github.com/Pyongine/pyongine/issues"
+    "url": "https://github.com/Enpyre/enpyre/issues"
   },
   "exports": {
     ".": {
-      "import": "./dist/pyongine.es.js",
-      "require": "./dist/pyongine.umd.js"
+      "import": "./dist/enpyre.es.js",
+      "require": "./dist/enpyre.umd.js"
     }
   },
   "scripts": {
@@ -39,10 +39,12 @@
   },
   "dependencies": {},
   "peerDependencies": {
+    "ace-builds": "^1.5.3",
     "error-stack-parser": "^2.0.7",
     "pixi.js": "^6.3.2",
     "pyodide": "^0.20.0",
     "react": "^18.0.0",
+    "react-ace": "^10.1.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
@@ -50,10 +52,12 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "ace-builds": "^1.5.3",
     "error-stack-parser": "^2.0.7",
     "pixi.js": "^6.3.2",
     "pyodide": "^0.20.0",
     "react": "^18.0.0",
+    "react-ace": "^10.1.0",
     "react-dom": "^18.0.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.9",

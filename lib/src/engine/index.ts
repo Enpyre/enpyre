@@ -15,7 +15,7 @@ export const drawCanvas = (setApp: React.Dispatch<React.SetStateAction<Applicati
     console.log("drawing canvas");
       setApp(previousApp => {
         console.log('previousApp', previousApp);
-        if (!window.appLoading) {
+        if (window.appLoading) {
           return previousApp;
         }
         if (previousApp) {

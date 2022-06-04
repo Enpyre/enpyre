@@ -1,12 +1,18 @@
 import React, { PropsWithChildren } from 'react';
 import AppContextProvider from './App';
+import CodeContextProvider from './Code';
+import PyodideContextProvider from './Pyodide';
 
-const PyongineProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+const EnpyreProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     return (
-        <AppContextProvider>
+      <AppContextProvider>
+        <CodeContextProvider>
+          <PyodideContextProvider>
             {children}
-        </AppContextProvider>
+          </PyodideContextProvider>
+        </CodeContextProvider>
+      </AppContextProvider>
     );
 }
 
-export default PyongineProvider;
+export default EnpyreProvider;

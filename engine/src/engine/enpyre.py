@@ -2,7 +2,7 @@ from typing import Callable
 from .core import Core
 from .graphics import Graphics
 
-class Pyongine(Core, Graphics):
+class Enpyre(Core, Graphics):
     KEY_UP = 'ArrowUp'
     KEY_LEFT = 'ArrowLeft'
     KEY_DOWN = 'ArrowDown'
@@ -23,10 +23,4 @@ class Pyongine(Core, Graphics):
     ):
         self.time = 0.0
         self.frame = 0
-        self.__update = update
-        self.draw_canvas(height, width, color, self.update)
-
-    def update(self, delta: float):
-        self.time += delta
-        self.frame += 1
-        self.__update(delta)
+        self.draw_canvas(height, width, color, self.get_update(update))

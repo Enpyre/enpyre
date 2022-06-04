@@ -9,6 +9,8 @@ declare global {
         pyodideAlreadyLoading: boolean;
         functionsLoaded: boolean;
         appLoading: boolean;
+        enpyrePackageLoaded: boolean;
+        canvasFocused: boolean;
         drawCanvas: DrawCanvas;
         drawCircle: DrawCircle;
     }
