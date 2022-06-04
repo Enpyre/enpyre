@@ -45,4 +45,5 @@ jobs:
       - name: Deploy
         uses: borales/actions-yarn@v2.3.0
         with:
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
           cmd: deploy
