@@ -7,6 +7,7 @@ import React, {
   useState,
 } from 'react';
 
+import constants from '../config/constants';
 import { loadFunctions } from '../engine';
 import { useApp } from '../hooks/App';
 import { useCode } from '../hooks/Code';
@@ -64,7 +65,7 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
     await pyodide.loadPackage('micropip');
     await pyodide.runPythonAsync(`
           import micropip
-          await micropip.install("http://localhost:8080/enpyre-0.0.1-py3-none-any.whl")
+          await micropip.install('${constants.enpyrePyURL}')
           from engine import *
       `);
     console.log('loaded package');

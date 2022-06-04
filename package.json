@@ -34,7 +34,7 @@
   "scripts": {
     "dev": "vite",
     "start": "yarn dev",
-    "build": "vite build",
+    "build": "NODE_ENV=production vite build",
     "deploy": "yarn publish --tag beta",
     "lint": "yarn lint:format && yarn lint:fix",
     "lint:fix": "eslint ./src --ext .js,.ts,.jsx,.tsx --quiet --fix",
