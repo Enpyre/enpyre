@@ -1,6 +1,6 @@
 {
   "name": "enpyre",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "files": [
     "dist"
   ],
@@ -41,15 +41,17 @@
     "lint:format": "prettier --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",
     "prepare": "husky install"
   },
-  "dependencies": {},
-  "peerDependencies": {
-    "ace-builds": "^1.5.3",
-    "error-stack-parser": "^2.0.7",
+  "dependencies": {
     "pixi.js": "^6.3.2",
-    "pyodide": "^0.20.0",
+    "pyodide": "^0.20.0"
+  },
+  "peerDependencies": {
     "react": "^18.0.0",
-    "react-ace": "^10.1.0",
     "react-dom": "^18.0.0"
+  },
+  "optionalDependencies": {
+    "ace-builds": "^1.5.3",
+    "react-ace": "^10.1.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.36",
