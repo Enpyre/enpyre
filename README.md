@@ -1,6 +1,28 @@
-# Enpyre React Lib
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/7717842/173475640-ab6ca0fe-7a92-4369-92c3-3c9b72cdb21f.jpg" alt="enpyre-logo" width="358" />
+</p>
 
-A Python game engine in React.
+<h1 align="center">
+  Enpyre
+</h1>
+
+<p align="center">
+  <strong>A Python game engine in React.</strong>
+  <br />
+  <sub>Write python games that run in React applications 👌</sub>
+</p>
+
+<br />
+
+<p align="center">
+  <a href="https://github.com/Enpyre/enpyre/actions/workflows/main.yml" target="_blank"><img src="https://github.com/Enpyre/enpyre/actions/workflows/main.yml/badge.svg" alt="build status" /></a>
+  <a href="https://www.npmjs.com/package/enpyre/" target="_blank"><img src="https://img.shields.io/npm/v/enpyre/latest" alt="npm version" /></a>
+  <a href="https://github.com/Enpyre/enpyre/blob/main/LICENSE" target="_blank"><img src="https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg" alt="license" /></a>
+</p>
+
+<br />
+
+Enpyre is an open-source library to render 2D games made with Python in React with graphics by <a href="http://www.pixijs.com/">PIXI.js</a> and the power of <a href="https://pyodide.org/en/stable/">Pyodide</a>, <a href="https://webassembly.org/">WASM</a>, and modern web technologies.
 
 ## Install
 
