@@ -22,7 +22,7 @@
 
 <br />
 
-Enpyre is an open-source liberary to render 2D games made with Python in React with graphics by <a href="http://www.pixijs.com/">PIXI.js</a> and the power of <a href="https://pyodide.org/en/stable/">Pyodide</a>, <a href="https://webassembly.org/">WASM</a>, and modern web technologies.
+Enpyre is an open-source library to render 2D games made with Python in React with graphics by <a href="http://www.pixijs.com/">PIXI.js</a> and the power of <a href="https://pyodide.org/en/stable/">Pyodide</a>, <a href="https://webassembly.org/">WASM</a>, and modern web technologies.
 
 ## Install
 
