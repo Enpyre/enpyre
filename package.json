@@ -1,6 +1,6 @@
 {
   "name": "enpyre",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "files": [
     "dist"
   ],
@@ -35,7 +35,8 @@
     "dev": "vite",
     "start": "yarn dev",
     "build": "tsc && NODE_ENV=production vite build",
-    "deploy": "yarn publish --tag beta",
+    "deploy:beta": "yarn publish --tag beta",
+    "deploy": "yarn publish --tag latest",
     "lint": "tsc && yarn lint:format && yarn lint:fix",
     "lint:fix": "eslint ./src --ext .js,.ts,.jsx,.tsx --quiet --fix",
     "lint:format": "prettier --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\"",

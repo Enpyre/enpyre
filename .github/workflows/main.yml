@@ -27,8 +27,8 @@ jobs:
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build
-  deploy:
-    name: Deploy
+  deploy_production:
+    name: Deploy Production
     runs-on: ubuntu-latest
     needs: lint_and_build
     if: github.ref == 'refs/heads/main'
@@ -42,8 +42,28 @@ jobs:
         uses: borales/actions-yarn@v2.3.0
         with:
           cmd: build
-      - name: Deploy
+      - name: Deploy Production
         uses: borales/actions-yarn@v2.3.0
         with:
           auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
           cmd: deploy
+  deploy_develop:
+    name: Deploy Develop
+    runs-on: ubuntu-latest
+    needs: lint_and_build
+    if: github.ref == 'refs/heads/develop'
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: install
+      - name: Build
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          cmd: build
+      - name: Deploy Develop
+        uses: borales/actions-yarn@v2.3.0
+        with:
+          auth-token: ${{ secrets.NPM_AUTH_TOKEN }}
+          cmd: deploy:beta
