@@ -1,6 +1,6 @@
 {
   "name": "enpyre",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "files": [
     "dist"
   ],
@@ -8,7 +8,7 @@
   "module": "./dist/enpyre.es.js",
   "types": "./dist/index.d.ts",
   "author": "Vitor Nere",
-  "license": "GPL-3.0-or-later",
+  "license": "MPL-2.0",
   "description": "A Python game engine for the browser",
   "keywords": [
     "game",
