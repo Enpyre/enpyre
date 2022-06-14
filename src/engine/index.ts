@@ -4,7 +4,7 @@ import React from 'react';
 const colorToInt = (color: string) => parseInt(color.replace('#', '0x'));
 
 export const drawCanvas = (
-  setApp: React.Dispatch<React.SetStateAction<Application>>,
+  setApp: React.Dispatch<React.SetStateAction<Application | undefined>>,
 ) => {
   const _drawCanvas = (
     height: number,
@@ -42,7 +42,7 @@ export const drawCanvas = (
 };
 
 export const drawCircle = (
-  setApp: React.Dispatch<React.SetStateAction<Application>>,
+  setApp: React.Dispatch<React.SetStateAction<Application | undefined>>,
 ) => {
   const _drawCircle = (x: number, y: number, r: number, color: string) => {
     const graphics = new Graphics();
@@ -51,7 +51,9 @@ export const drawCircle = (
     graphics.drawCircle(x, y, r);
     graphics.endFill();
     setApp((app) => {
-      app.stage.addChild(graphics);
+      if (app) {
+        app.stage.addChild(graphics);
+      }
       return app;
     });
     return graphics;
@@ -60,7 +62,7 @@ export const drawCircle = (
 };
 
 export const loadFunctions = (
-  setApp: React.Dispatch<React.SetStateAction<Application>>,
+  setApp: React.Dispatch<React.SetStateAction<Application | undefined>>,
 ) => {
   window.drawCanvas = drawCanvas(setApp);
   window.drawCircle = drawCircle(setApp);

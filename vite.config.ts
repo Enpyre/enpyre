@@ -15,28 +15,15 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'Enpyre',
-      formats: ['es', 'umd'],
       fileName: (format) => `enpyre.${format}.js`,
     },
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'pyodide',
-        'pixi.js',
-        'error-stack-parser',
-        'ace-builds',
-        'react-ace',
-      ],
+      external: ['react', 'react-dom', 'pixi.js', 'ace-builds', 'react-ace'],
       output: {
-        inlineDynamicImports: true,
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          'styled-components': 'styled',
-          pyodide: 'pyodide',
           'pixi.js': 'pixijs',
-          'error-stack-parser': 'errorStackParser',
           'ace-build': 'aceBuilds',
           'react-ace': 'reactAce',
         },

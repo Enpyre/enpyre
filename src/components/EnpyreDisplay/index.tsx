@@ -11,10 +11,12 @@ const EnpyreDisplay: React.FC = () => {
   useEffect(() => {
     console.log('EnpyreDisplay: app', app);
     if (app) {
-      const canvasDiv: HTMLElement =
+      const canvasDiv: HTMLElement | null =
         document.getElementById('canvas-container');
-      canvasDiv.innerHTML = '';
-      canvasDiv.appendChild(app.view);
+      if (canvasDiv) {
+        canvasDiv.innerHTML = '';
+        canvasDiv.appendChild(app.view);
+      }
       document.addEventListener('keydown', keyEvent, false);
       document.addEventListener('keyup', keyEvent, false);
     }

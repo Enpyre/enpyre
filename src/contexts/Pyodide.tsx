@@ -1,4 +1,3 @@
-import { loadPyodide } from 'pyodide/pyodide.js';
 import React, {
   createContext,
   PropsWithChildren,
@@ -11,6 +10,7 @@ import constants from '../config/constants';
 import { loadFunctions } from '../engine';
 import { useApp } from '../hooks/App';
 import { useCode } from '../hooks/Code';
+import { Pyodide } from '../types/pyodide';
 
 type PyodideContextType = {
   pyodideLoaded: boolean;
@@ -24,80 +24,107 @@ export const PyodideContext = createContext<PyodideContextType>(
 const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
   children,
 }) => {
-  const [pyodide, setPyodide] = useState<any>();
-  const [pyodidePackageLoaded, setPyodidePackageLoaded] = useState(
-    !!window.pyodideAlreadyLoading,
-  );
-  const [functionsLoaded, setFunctionsLoaded] = useState(
-    !!window.functionsLoaded,
-  );
-  const [enpyrePackageLoaded, setEnpyrePackageLoaded] = useState(
-    !!window.enpyrePackageLoaded,
-  );
+  const [pyodide, setPyodide] = useState<Pyodide>();
+  const [functionsLoaded, setFunctionsLoaded] = useState(false);
+  const [enpyrePackageLoaded, setEnpyrePackageLoaded] = useState(false);
   const [pyodideLoaded, setPyodideLoaded] = useState(false);
   const { setApp } = useApp();
   const { code } = useCode();
 
-  const runCode = useCallback(() => {
-    if (pyodide) {
-      pyodide.runPython(code);
-    } else {
-      console.error('Pyodide not loaded');
+  /**
+   * Loads the pyodide engine
+   */
+  const loadPyodide = useCallback(async () => {
+    if (window.loadPyodide && !window.pyodideAlreadyLoading && !pyodide) {
+      console.log('loadPyodide: Loading pyodide...');
+      window.pyodideAlreadyLoading = true;
+      const _pyodide = await window.loadPyodide();
+      setPyodide(_pyodide);
+      console.log('loadPyodide: Pyodide loaded!');
+      window.pyodideAlreadyLoading = false;
+      setEnpyrePackageLoaded(false);
+      setFunctionsLoaded(false);
+      setPyodideLoaded(false);
     }
-  }, [pyodide, code]);
+  }, [pyodide]);
 
   const loadPyodideScript = useCallback(async () => {
-    window.pyodideAlreadyLoading = true;
-    const pyodideScript = await loadPyodide({
-      indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.20.0/full/',
-    });
-    console.log('loaded pyodide');
-    setPyodide(pyodideScript);
-    setPyodidePackageLoaded(true);
-  }, []);
+    const existingScript = document.getElementById('pyodide');
+    if (!pyodide && !existingScript) {
+      console.log('loadPyodideScript: Adding pyodide script');
+      const script = document.createElement('script');
+      script.src = 'https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js';
+      script.id = 'pyodide';
+      document.body.appendChild(script);
+      script.onload = async () => {
+        console.log('loadPyodide', window.loadPyodide);
+        await loadPyodide();
+      };
+    } else if (!pyodide) {
+      loadPyodide();
+    }
+  }, [loadPyodide, pyodide]);
 
-  console.log('pyodide', pyodide);
-  console.log('pyodidePackageLoaded', pyodidePackageLoaded);
+  useEffect(() => {
+    if (!window.pyodideAlreadyLoading) {
+      console.log('useEffect: loadPyodideScript');
+      loadPyodideScript();
+    }
+  }, [loadPyodideScript, pyodide]);
 
+  /**
+   * Loads the enpyre package.
+   */
   const loadPackage = useCallback(async () => {
-    window.enpyrePackageLoaded = true;
-    console.log('loading package');
-    await pyodide.loadPackage('micropip');
-    await pyodide.runPythonAsync(`
+    if (pyodide && !enpyrePackageLoaded) {
+      console.log('loadPackage: Loading package');
+      await pyodide.loadPackage('micropip');
+      await pyodide.runPythonAsync(`
           import micropip
           await micropip.install('${constants.enpyrePyURL}')
           from engine import *
       `);
-    console.log('loaded package');
-    setEnpyrePackageLoaded(true);
-  }, [pyodide]);
-
-  useEffect(() => {
-    console.log('loadingPyodide', (window as any).loadingPyodide);
-    if (!window.pyodideAlreadyLoading) {
-      loadPyodideScript();
+      setEnpyrePackageLoaded(true);
+      console.log('loadPackage: Package loaded!');
     }
-  }, [loadPyodideScript]);
+  }, [pyodide, enpyrePackageLoaded]);
 
   useEffect(() => {
-    if (!window.functionsLoaded && pyodidePackageLoaded) {
-      window.functionsLoaded = true;
+    if (!enpyrePackageLoaded) {
+      loadPackage();
+    }
+  }, [loadPackage, enpyrePackageLoaded]);
+
+  /**
+   * Loads the functions.
+   */
+  useEffect(() => {
+    if (!functionsLoaded) {
       loadFunctions(setApp);
       setFunctionsLoaded(true);
     }
-  }, [pyodidePackageLoaded, setApp]);
+  }, [setApp, functionsLoaded]);
 
+  /**
+   * Set pyodide fully loaded.
+   */
   useEffect(() => {
-    if (!window.enpyrePackageLoaded && pyodidePackageLoaded) {
-      loadPackage();
-    }
-  }, [loadPackage, pyodidePackageLoaded]);
-
-  useEffect(() => {
-    if (pyodidePackageLoaded && enpyrePackageLoaded && functionsLoaded) {
+    if (pyodide && enpyrePackageLoaded && functionsLoaded) {
       setPyodideLoaded(true);
     }
-  }, [pyodidePackageLoaded, enpyrePackageLoaded, functionsLoaded]);
+  }, [enpyrePackageLoaded, functionsLoaded, pyodide]);
+
+  const runCode = useCallback(() => {
+    console.log('runCode.pyodide', pyodide);
+    console.log('runCode.code', code);
+    if (pyodide && code) {
+      pyodide.runPython(code);
+    } else if (!code) {
+      console.error('No code to run');
+    } else {
+      console.error('Pyodide not loaded');
+    }
+  }, [pyodide, code]);
 
   return (
     <PyodideContext.Provider value={{ pyodideLoaded, runCode }}>
