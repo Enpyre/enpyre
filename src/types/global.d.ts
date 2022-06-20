@@ -1,4 +1,10 @@
-import { DrawCanvas, DrawCircle } from '../engine/types';
+import {
+  AddSong,
+  DrawCanvas,
+  DrawCircle,
+  PlaySong,
+  StopSong,
+} from '../engine/types';
 import { Pyodide } from './pyodide';
 
 type CurrentWindow = Window & typeof globalThis;
@@ -13,6 +19,9 @@ declare global {
     canvasFocused?: boolean;
     drawCanvas?: DrawCanvas;
     drawCircle?: DrawCircle;
+    addSong?: AddSong;
+    playSong?: PlaySong;
+    stopSong?: StopSong;
   }
 }
 

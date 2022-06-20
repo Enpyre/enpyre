@@ -6,6 +6,7 @@ import { usePyodide } from './hooks/Pyodide';
 
 const Preview: React.FC = () => {
   const { runCode } = usePyodide();
+
   return (
     <>
       <EnpyreDisplay />

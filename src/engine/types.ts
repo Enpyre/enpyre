@@ -19,3 +19,13 @@ export type DrawCircle = (
   r: number,
   color: string,
 ) => Graphics;
+
+export type AddSong = (
+  alias: string,
+  url: string,
+  playOnLoad?: boolean,
+) => void;
+
+export type PlaySong = (alias: string) => void;
+
+export type StopSong = (alias?: string) => void;

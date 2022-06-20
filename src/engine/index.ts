@@ -1,3 +1,4 @@
+import { sound } from '@pixi/sound';
 import { Application, Graphics } from 'pixi.js';
 import React from 'react';
 
@@ -61,9 +62,36 @@ export const drawCircle = (
   return _drawCircle;
 };
 
+export const addSong = (alias: string, url: string, playOnLoad = false) => {
+  const loadSound = async (url: string) => {
+    const response = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+    sound.add(alias, arrayBuffer);
+    if (playOnLoad) {
+      sound.play(alias);
+    }
+  };
+  loadSound(url);
+};
+
+export const playSong = (alias: string) => {
+  sound.play(alias);
+};
+
+export const stopSong = (alias?: string) => {
+  if (alias) {
+    sound.stop(alias);
+  } else {
+    sound.stopAll();
+  }
+};
+
 export const loadFunctions = (
   setApp: React.Dispatch<React.SetStateAction<Application | undefined>>,
 ) => {
   window.drawCanvas = drawCanvas(setApp);
   window.drawCircle = drawCircle(setApp);
+  window.addSong = addSong;
+  window.playSong = playSong;
+  window.stopSong = stopSong;
 };
