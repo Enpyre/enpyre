@@ -82,7 +82,7 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
       await pyodide.runPythonAsync(`
           import micropip
           await micropip.install('${constants.enpyrePyURL}')
-          from engine import *
+          from enpyre import *
       `);
       setEnpyrePackageLoaded(true);
       console.log('loadPackage: Package loaded!');

@@ -1,6 +1,6 @@
 {
   "name": "enpyre",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "files": [
     "dist"
   ],
@@ -43,6 +43,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@pixi/sound": "^4.2.0",
     "pixi.js": "^6.3.2"
   },
   "peerDependencies": {
