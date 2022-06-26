@@ -1,4 +1,4 @@
-import { Graphics } from 'pixi.js';
+import { Graphics, Sprite } from 'pixi.js';
 
 export type CanvasProps = {
   height: number;
@@ -29,3 +29,5 @@ export type AddSong = (
 export type PlaySong = (alias: string) => void;
 
 export type StopSong = (alias?: string) => void;
+
+export type AddSprite = (imageUrl: string) => Sprite;

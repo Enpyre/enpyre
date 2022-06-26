@@ -1,5 +1,5 @@
 import { sound } from '@pixi/sound';
-import { Application, Graphics } from 'pixi.js';
+import { Application, Graphics, Sprite } from 'pixi.js';
 import React from 'react';
 
 const colorToInt = (color: string) => parseInt(color.replace('#', '0x'));
@@ -86,6 +86,22 @@ export const stopSong = (alias?: string) => {
   }
 };
 
+export const addSprite = (
+  setApp: React.Dispatch<React.SetStateAction<Application | undefined>>,
+) => {
+  const _addSprite = (imageUrl: string) => {
+    const sprite = Sprite.from(imageUrl);
+    setApp((app) => {
+      if (app) {
+        app.stage.addChild(sprite);
+      }
+      return app;
+    });
+    return sprite;
+  };
+  return _addSprite;
+};
+
 export const loadFunctions = (
   setApp: React.Dispatch<React.SetStateAction<Application | undefined>>,
 ) => {
@@ -94,4 +110,5 @@ export const loadFunctions = (
   window.addSong = addSong;
   window.playSong = playSong;
   window.stopSong = stopSong;
+  window.addSprite = addSprite(setApp);
 };
