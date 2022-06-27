@@ -1,5 +1,6 @@
 import {
   AddSong,
+  AddSprite,
   DrawCanvas,
   DrawCircle,
   PlaySong,
@@ -22,6 +23,7 @@ declare global {
     addSong?: AddSong;
     playSong?: PlaySong;
     stopSong?: StopSong;
+    addSprite?: AddSprite;
   }
 }
 
