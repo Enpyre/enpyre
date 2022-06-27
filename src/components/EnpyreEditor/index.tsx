@@ -9,7 +9,7 @@ import 'ace-builds/src-noconflict/ext-language_tools';
 import { useCode } from '../../hooks/Code';
 
 const EnpyreEditor: React.FC = () => {
-  const { setCode } = useCode();
+  const { setCode, code } = useCode();
 
   return (
     <AceEditor
@@ -17,6 +17,7 @@ const EnpyreEditor: React.FC = () => {
       theme="dracula"
       name="enpyre-editor"
       onChange={setCode}
+      value={code}
       editorProps={{ $blockScrolling: true }}
       enableBasicAutocompletion
     />
