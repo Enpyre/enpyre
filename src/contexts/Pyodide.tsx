@@ -48,6 +48,7 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
       window.pyodideAlreadyLoading = true;
       const _pyodide = await window.loadPyodide({
         stdout: storeOutput,
+        stderr: storeOutput,
       });
       setPyodide(_pyodide);
       window.pyodideAlreadyLoading = false;
@@ -121,7 +122,14 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
   const runCode = useCallback(() => {
     setOutput([]);
     if (pyodide && code) {
-      pyodide.runPython(code);
+      try {
+        pyodide.runPython(code);
+      } catch (e) {
+        if (e instanceof Error && e.name === 'PythonError') {
+          const msg: string = e.message;
+          setOutput((previousOutput) => [...previousOutput, msg]);
+        }
+      }
     } else if (!code) {
       console.error('No code to run');
     } else {

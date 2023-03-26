@@ -12,6 +12,7 @@ type CurrentWindow = Window & typeof globalThis;
 
 type PyodideOptions = {
   stdout: (msg: string) => void;
+  stderr: (msg: string) => void;
 };
 
 declare global {

@@ -8,7 +8,7 @@ const EnpyreOutput: React.FC = () => {
   return (
     <div>
       {output?.map((msg, index) => (
-        <p key={index}>{msg}</p>
+        <pre key={index}>{msg}</pre>
       ))}
     </div>
   );
