@@ -9,7 +9,6 @@ const EnpyreDisplay: React.FC = () => {
   const { pyodideLoaded } = usePyodide();
 
   useEffect(() => {
-    console.log('EnpyreDisplay: app', app);
     if (app) {
       const canvasDiv: HTMLElement | null =
         document.getElementById('canvas-container');
@@ -21,8 +20,6 @@ const EnpyreDisplay: React.FC = () => {
       document.addEventListener('keyup', keyEvent, false);
     }
   }, [app]);
-
-  console.log('EnpyreDisplay: pyodideLoaded', pyodideLoaded);
 
   return (
     <div>

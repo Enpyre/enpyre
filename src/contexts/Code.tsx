@@ -14,8 +14,6 @@ const CodeContextProvider: React.FC<PropsWithChildren<unknown>> = ({
 }) => {
   const [code, setCode] = React.useState<string | undefined>(undefined);
 
-  console.log('CodeContextProvider: code', code);
-
   return (
     <CodeContext.Provider value={{ code, setCode }}>
       {children}

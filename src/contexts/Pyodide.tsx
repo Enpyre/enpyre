@@ -45,30 +45,26 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
    */
   const loadPyodide = useCallback(async () => {
     if (window.loadPyodide && !window.pyodideAlreadyLoading && !pyodide) {
-      console.log('loadPyodide: Loading pyodide...');
       window.pyodideAlreadyLoading = true;
       const _pyodide = await window.loadPyodide({
         stdout: storeOutput,
       });
       setPyodide(_pyodide);
-      console.log('loadPyodide: Pyodide loaded!');
       window.pyodideAlreadyLoading = false;
       setEnpyrePackageLoaded(false);
       setFunctionsLoaded(false);
       setPyodideLoaded(false);
     }
-  }, [pyodide]);
+  }, [pyodide, storeOutput]);
 
   const loadPyodideScript = useCallback(async () => {
     const existingScript = document.getElementById('pyodide');
     if (!pyodide && !existingScript) {
-      console.log('loadPyodideScript: Adding pyodide script');
       const script = document.createElement('script');
       script.src = 'https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js';
       script.id = 'pyodide';
       document.body.appendChild(script);
       script.onload = async () => {
-        console.log('loadPyodide', window.loadPyodide);
         await loadPyodide();
       };
     } else if (!pyodide) {
@@ -78,7 +74,6 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
 
   useEffect(() => {
     if (!window.pyodideAlreadyLoading) {
-      console.log('useEffect: loadPyodideScript');
       loadPyodideScript();
     }
   }, [loadPyodideScript, pyodide]);
@@ -88,7 +83,6 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
    */
   const loadPackage = useCallback(async () => {
     if (pyodide && !enpyrePackageLoaded) {
-      console.log('loadPackage: Loading package');
       await pyodide.loadPackage('micropip');
       await pyodide.runPythonAsync(`
           import micropip
@@ -96,7 +90,6 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
           from enpyre import *
       `);
       setEnpyrePackageLoaded(true);
-      console.log('loadPackage: Package loaded!');
     }
   }, [pyodide, enpyrePackageLoaded]);
 
