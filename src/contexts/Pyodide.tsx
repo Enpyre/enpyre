@@ -10,6 +10,7 @@ import constants from '../config/constants';
 import { loadFunctions } from '../engine';
 import { useApp } from '../hooks/App';
 import { useCode } from '../hooks/Code';
+import { useOutput } from '../hooks/Output';
 import { Pyodide } from '../types/pyodide';
 
 type PyodideContextType = {
@@ -30,6 +31,14 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
   const [pyodideLoaded, setPyodideLoaded] = useState(false);
   const { setApp } = useApp();
   const { code } = useCode();
+  const { setOutput } = useOutput();
+
+  const storeOutput = React.useCallback(
+    (msg: string) => {
+      setOutput((previousOutput) => [...previousOutput, msg]);
+    },
+    [setOutput],
+  );
 
   /**
    * Loads the pyodide engine
@@ -38,7 +47,9 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
     if (window.loadPyodide && !window.pyodideAlreadyLoading && !pyodide) {
       console.log('loadPyodide: Loading pyodide...');
       window.pyodideAlreadyLoading = true;
-      const _pyodide = await window.loadPyodide();
+      const _pyodide = await window.loadPyodide({
+        stdout: storeOutput,
+      });
       setPyodide(_pyodide);
       console.log('loadPyodide: Pyodide loaded!');
       window.pyodideAlreadyLoading = false;
@@ -115,8 +126,7 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
   }, [enpyrePackageLoaded, functionsLoaded, pyodide]);
 
   const runCode = useCallback(() => {
-    console.log('runCode.pyodide', pyodide);
-    console.log('runCode.code', code);
+    setOutput([]);
     if (pyodide && code) {
       pyodide.runPython(code);
     } else if (!code) {
@@ -124,7 +134,7 @@ const PyodideContextProvider: React.FC<PropsWithChildren<unknown>> = ({
     } else {
       console.error('Pyodide not loaded');
     }
-  }, [pyodide, code]);
+  }, [pyodide, code, setOutput]);
 
   return (
     <PyodideContext.Provider value={{ pyodideLoaded, runCode }}>

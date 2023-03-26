@@ -10,9 +10,13 @@ import { Pyodide } from './pyodide';
 
 type CurrentWindow = Window & typeof globalThis;
 
+type PyodideOptions = {
+  stdout: (msg: string) => void;
+};
+
 declare global {
   interface Window extends CurrentWindow {
-    loadPyodide?: () => Promise<Pyodide>;
+    loadPyodide?: (options?: PyodideOptions) => Promise<Pyodide>;
     pyodideAlreadyLoading?: boolean;
     functionsLoaded?: boolean;
     appLoading?: boolean;
