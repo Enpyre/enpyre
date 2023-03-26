@@ -3,6 +3,7 @@ import EnpyreEditor from './components/EnpyreEditor';
 import EnpyreProvider from './contexts';
 import { useApp } from './hooks/App';
 import { useCode } from './hooks/Code';
+import { useOutput } from './hooks/Output';
 import { usePyodide } from './hooks/Pyodide';
 
 export {
@@ -11,5 +12,6 @@ export {
   EnpyreProvider,
   useApp,
   useCode,
+  useOutput,
   usePyodide,
 };
